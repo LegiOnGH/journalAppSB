@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: journalApp
+
+  data:
+    mongodb:
+      uri: mongodb+srv://<username>:<password@mongocluster.kiyhuzg.mongodb.net/?appName=<cluster-name>
+      #host: localhost #for local db integration
+      #port: 27017
+      database: journalDB
+      auto-index-creation: true
+
+  main:
+    allow-circular-references: true
