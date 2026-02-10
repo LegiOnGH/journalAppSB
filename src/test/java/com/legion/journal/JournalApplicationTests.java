@@ -1,4 +1,4 @@
-package com.legion.journalApp;
+package com.legion.journal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

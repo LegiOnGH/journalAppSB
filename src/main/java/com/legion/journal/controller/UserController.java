@@ -1,16 +1,16 @@
-package com.legion.journalApp.controller;
+package com.legion.journal.controller;
 
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.repository.UserRepo;
-import com.legion.journalApp.service.UserService;
+import com.legion.journal.apiResponse.WeatherResponse;
+import com.legion.journal.entity.User;
+import com.legion.journal.repository.UserRepo;
+import com.legion.journal.service.UserService;
+import com.legion.journal.service.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -21,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    WeatherService weatherService;
 
     @PutMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody User user){
@@ -44,4 +47,16 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/greet")
+    public ResponseEntity<?> greeting(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("Shimla");
+        String greeting = "";
+        if(weatherResponse!=null){
+            greeting = ", Weather feels like: "+ weatherResponse
+                    .getCurrent()
+                    .getFeelslike();
+        }
+        return new ResponseEntity<>("Hi "+authentication.getName()+ greeting ,HttpStatus.OK);
+    }
 }

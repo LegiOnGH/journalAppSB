@@ -1,7 +1,7 @@
-package com.legion.journalApp.service;
+package com.legion.journal.service;
 
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.repository.UserRepo;
+import com.legion.journal.entity.User;
+import com.legion.journal.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

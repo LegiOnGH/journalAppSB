@@ -1,9 +1,10 @@
-package com.legion.journalApp.controller;
+package com.legion.journal.controller;
 
-import com.legion.journalApp.entity.JournalEntry;
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.service.JournalEntryService;
-import com.legion.journalApp.service.UserService;
+import com.legion.journal.entity.JournalEntry;
+import com.legion.journal.entity.User;
+import com.legion.journal.enums.Sentiment;
+import com.legion.journal.service.JournalEntryService;
+import com.legion.journal.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/journal")
@@ -92,7 +92,8 @@ public class JournalEntryController {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String userName = authentication.getName();
-            journalEntryService.saveEntry(journalEntry, userName);
+            Sentiment sentiment = journalEntry.getSentiment();
+            journalEntryService.saveEntry(journalEntry, userName, sentiment);
             return new ResponseEntity<>(journalEntry,HttpStatus.CREATED);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

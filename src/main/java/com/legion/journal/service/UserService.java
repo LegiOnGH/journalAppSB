@@ -1,16 +1,14 @@
-package com.legion.journalApp.service;
+package com.legion.journal.service;
 
 
-import com.legion.journalApp.entity.JournalEntry;
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.repository.UserRepo;
+import com.legion.journal.entity.User;
+import com.legion.journal.repository.UserRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

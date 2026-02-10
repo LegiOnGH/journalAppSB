@@ -1,7 +1,7 @@
-package com.legion.journalApp.controller;
+package com.legion.journal.controller;
 
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.service.UserService;
+import com.legion.journal.entity.User;
+import com.legion.journal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

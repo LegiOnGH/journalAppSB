@@ -1,19 +1,18 @@
-package com.legion.journalApp.service;
+package com.legion.journal.service;
 
 
-import com.legion.journalApp.entity.JournalEntry;
-import com.legion.journalApp.entity.User;
-import com.legion.journalApp.repository.JournalEntryRepo;
+import com.legion.journal.entity.JournalEntry;
+import com.legion.journal.entity.User;
+import com.legion.journal.enums.Sentiment;
+import com.legion.journal.repository.JournalEntryRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import org.slf4j.Logger;
 
 @Service
 @Slf4j
@@ -26,9 +25,10 @@ public class JournalEntryService {
     private UserService userService;
 
     @Transactional
-    public void saveEntry(JournalEntry journalEntry, String userName){
+    public void saveEntry(JournalEntry journalEntry, String userName, Sentiment sentiment){
         User user = userService.findByUserName(userName);
         journalEntry.setDate(LocalDateTime.now());
+        journalEntry.setSentiment(sentiment);
         JournalEntry saved = journalEntryRepo.save((journalEntry));
         user.getJournalEntry().add(saved);
         userService.saveUser(user);
