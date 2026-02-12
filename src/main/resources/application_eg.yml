@@ -30,6 +30,50 @@ spring:
           starttls:
             enable: true
 
+  kafka:
+    bootstrap:
+      servers: ${Bootstrap_Server(s)}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: true
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      group-id: weekly-sentiment-group
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: *
+          value:
+            default:
+              type: com.legion.journal.model.SentimentData
+    properties:
+      security:
+        protocol: PLAINTEXT
+      session:
+        timeout:
+          ms: 45000
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${Google_Client_Id}
+            client-secret: ${Google_Client_Secret}
+
+  server:
+    port: ${Server_Port}
+    servlet:
+      context-path: /app
+
 logging:
   level:
     com:
