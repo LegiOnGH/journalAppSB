@@ -5,6 +5,7 @@ import com.legion.journal.entity.User;
 import com.legion.journal.repository.UserRepo;
 import com.legion.journal.service.UserService;
 import com.legion.journal.service.WeatherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "Read, Update and Delete Users.")
 public class UserController {
 
     @Autowired
